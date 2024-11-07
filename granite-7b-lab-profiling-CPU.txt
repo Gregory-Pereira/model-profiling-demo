@@ -1,0 +1,20 @@
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:07<00:00,  2.39s/it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+STAGE:2024-10-30 12:04:20 6811:3412844 ActivityProfilerController.cpp:314] Completed Stage: Warm Up
+STAGE:2024-10-30 12:04:23 6811:3412844 ActivityProfilerController.cpp:320] Completed Stage: Collection
+STAGE:2024-10-30 12:04:23 6811:3412844 ActivityProfilerController.cpp:324] Completed Stage: Post Processing
+-----------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                                 Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls
+-----------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+                                         aten::linear         1.85%      55.032ms        87.58%        2.599s       2.321ms          1120
+                                         aten::matmul         0.37%      10.905ms        87.43%        2.595s       2.027ms          1280
+                                             aten::mm        86.69%        2.573s        86.69%        2.573s       2.297ms          1120
+                                            aten::mul         3.94%     116.794ms         3.94%     116.794ms      80.271us          1455
+                                            aten::add         1.90%      56.312ms         1.93%      57.133ms      59.205us           965
+                                           aten::mean         0.11%       3.198ms         1.17%      34.608ms     106.486us           325
+                                            aten::pow         0.97%      28.798ms         0.97%      28.808ms      88.640us           325
+                                            aten::sum         0.88%      26.055ms         0.89%      26.385ms      81.185us           325
+                                           aten::silu         0.84%      24.937ms         0.84%      24.937ms     155.856us           160
+                   aten::scaled_dot_product_attention         0.09%       2.571ms         0.71%      21.055ms     131.594us           160
+-----------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
+Self CPU time total: 2.968s
