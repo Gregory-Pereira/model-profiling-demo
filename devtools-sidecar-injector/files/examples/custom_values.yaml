@@ -1,0 +1,6 @@
+# Nsight Systems profiling configuration
+profile:
+  # The arguments for the Nsight Systems. The placeholders will be replaced with the actual values.
+  devtoolArgs: "profile -f true --trace nvtx,cuda -o /home/auto_{PROCESS_NAME}_%{POD_FULLNAME}_%{CONTAINER_NAME}_{TIMESTAMP}_{UID}.nsys-rep"
+  # The regex to match applications to profile.
+  injectionMatch: "^/cuda-samples/vectorAdd.*$"

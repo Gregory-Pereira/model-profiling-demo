@@ -1,0 +1,7 @@
+
+# Nsight Systems profiling configuration
+profile:
+  # The arguments for the Nsight Systems. The placeholders will be replaced with the actual values.
+  devtoolArgs: "launch --trace nvtx,cuda"
+  # The regex to match applications to profile.
+  injectionMatch: "^/cuda-samples/vectorAdd.*$"

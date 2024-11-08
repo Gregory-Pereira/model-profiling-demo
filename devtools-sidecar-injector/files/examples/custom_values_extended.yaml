@@ -1,0 +1,18 @@
+# Nsight Systems profiling configuration
+profile:
+  # A volume to store profiling results. It can be omitted, but in this case, the results will be lost after the pod
+  # deletion and they will not be in the common location.
+  # You may skip this section if you already have a shared volume for all the profiling pods.
+  volumes:
+    [
+      {
+        "name": "nsys-output-volume",
+        "persistentVolumeClaim": { "claimName": "CSP-managed-disk" },
+      },
+    ]
+  volumeMounts:
+    [{ "name": "nsys-output-volume", "mountPath": "/mnt/nsys/output" }]
+  # The arguments for the Nsight Systems. The placeholders will be replaced with the actual values.
+  devtoolArgs: "profile -f true --trace nvtx,cuda -o /mnt/nsys/output/auto_{PROCESS_NAME}_%{POD_FULLNAME}_%{CONTAINER_NAME}_{TIMESTAMP}_{UID}.nsys-rep"
+  # The regex to match applications to profile.
+  injectionMatch: "^/cuda-samples/vectorAdd*$"
