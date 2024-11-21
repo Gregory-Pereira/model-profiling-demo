@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: investigate-csp-pvc
+  namespace: triton-profiling
+  labels:
+    author: grpereir
+spec:
+  containers:
+    - name: pvc-container
+      image: registry.access.redhat.com/ubi9/ubi:latest # Replace with your preferred image
+      command: ["/bin/sh", "-c", "sleep infinity"]
+      volumeMounts:
+        - mountPath: /tmp
+          name: csp-managed-disk
+  volumes:
+  - name: csp-managed-disk
+    persistentVolumeClaim:
+      claimName: csp-managed-disk

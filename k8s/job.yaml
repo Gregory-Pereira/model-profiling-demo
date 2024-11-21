@@ -15,6 +15,7 @@ spec:
       containers:
       - name: profiling-container
         image: quay.io/grpereir/triton-profiling:latest
+        command: ["/bin/sh", "-c", "sleep infinity"]
         resources:
           limits:
             nvidia.com/gpu: 1  # Request a single GPU
@@ -28,7 +29,7 @@ spec:
         volumeMounts:
         - name: log-volume
           mountPath: "/log"
-        - name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
+        - name: granite
           mountPath: /opt/app-root/src/granite-7b-lab
       restartPolicy: Never  # Run the job only once
       tolerations:
@@ -38,6 +39,6 @@ spec:
       volumes:
       - name: log-volume
         emptyDir: {}  # Temporary storage for logs (or configure a persistent volume claim if needed)
-      - name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
+      - name: granite
         persistentVolumeClaim:
           claimName: granite-7b-lab-pvc

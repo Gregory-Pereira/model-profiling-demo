@@ -1,0 +1,27 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: nsys-output-volume
+spec:
+  capacity:
+    storage: 50Gi
+  csi:
+    driver: openshift-storage.rbd.csi.ceph.com
+    fsType: ext4
+    volumeAttributes:
+      clusterID: openshift-storage
+      imageName: csi-vol-1f28becf-f44f-4fa4-94bb-079be7b37955
+      journalPool: moc-rbd-openshift-beta-test
+      pool: moc-rbd-openshift-beta-test
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: openshift-storage
+    controllerExpandSecretRef:
+      name: rook-csi-rbd-provisioner
+      namespace: openshift-storage
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    kind: PersistentVolumeClaim
+    namespace: triton-profiling
+    name: csp-managed-disk

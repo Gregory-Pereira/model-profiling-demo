@@ -4,12 +4,13 @@ metadata:
   name: csp-managed-disk
   namespace: triton-profiling
   labels:
-    app: triton
+    author: grpereir
+    app: triton-profiling
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: ocs-external-storagecluster-ceph-rbd
-  volumeMode: Block
+  storageClassName: nfs-csi
+  volumeMode: Filesystem
   resources:
     requests:
-      storage: 40Gi
+      storage: 50Gi

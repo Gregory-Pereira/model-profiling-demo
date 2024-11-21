@@ -1,6 +1,0 @@
-# Nsight Systems profiling configuration
-profile:
-  # The arguments for the Nsight Systems. The placeholders will be replaced with the actual values.
-  devtoolArgs: "launch"
-  # The regex to match applications to profile.
-  injectionMatch: "^(?!.*nsys( |$)).*\\triton-profiling.*$"
