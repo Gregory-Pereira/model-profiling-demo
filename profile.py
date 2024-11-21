@@ -1,13 +1,31 @@
 import torch
+import logging
+import os
 from torch.profiler import profile, ProfilerActivity, tensorboard_trace_handler
 from transformers import AutoModel, AutoTokenizer
 
-# model_dir = '/opt/app-root/src/granite-7b-lab'
-model_dir = './models/granite-7b-lab'
+logger = logging.getLogger(__name__)
+
+if os.getenv("MODEL_DIR"):
+    model_dir = os.getenv("MODEL_DIR")
+    if not os.path.exists(model_dir):
+        error = f"Error, requires a `MODEL_DIR` env variable is set, but no directory exists."
+        logger.error(error)
+        raise ValueError(error)
+else:
+    error = f"Error, requires a `MODEL_DIR` env variable, that corresponds to the model directory path in the base image."
+    logger.error(error)
+    raise ValueError(error)
 
 model = AutoModel.from_pretrained(model_dir).cuda()  # Move model to GPU
 tokenizer = AutoTokenizer.from_pretrained(model_dir)
 model.eval()
+
+# model_name = "instructlab/granite-7b-lab"  # Replace with the desired model name
+
+# Download the model and tokenizer from Hugging Face
+# model = AutoModel.from_pretrained(model_name).cuda()
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Prepare a sample input for profiling
 instruction_prompts = [

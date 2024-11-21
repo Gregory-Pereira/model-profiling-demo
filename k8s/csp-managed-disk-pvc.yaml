@@ -2,13 +2,14 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: csp-managed-disk
-  namespace: triton
+  namespace: triton-profiling
   labels:
     app: triton
 spec:
   accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
+    - ReadWriteMany
+  storageClassName: ocs-external-storagecluster-ceph-rbd
+  volumeMode: Block
   resources:
     requests:
-      storage: 2Gi
+      storage: 40Gi

@@ -2,12 +2,15 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: triton-profiling-job
-  namespace: triton
+  namespace: triton-profiling
+  labels:
+    author: grpereir
 spec:
   template:
     metadata:
       labels:
         app: triton-profiling
+        author: grpereir
     spec:
       containers:
       - name: profiling-container
@@ -16,17 +19,17 @@ spec:
           limits:
             nvidia.com/gpu: 1  # Request a single GPU
         env:
-        # - name: MODEL_DIR
-        #   value: "/path_to_your_model_directory"  # Replace with the actual model path if needed
+        - name: HF_HOME
+          value: "/tmp/.cache/huggingface"
         - name: LOG_DIR
           value: "/log"  # Directory for TensorBoard logs
+        - name: MODEL_DIR
+          value: "/opt/app-root/src/granite-7b-lab"
         volumeMounts:
         - name: log-volume
           mountPath: "/log"
-        - name: csp-managed-disk
-          mountPath: "/mnt/nsys/output"
-        # # Use command override if needed, e.g., python script.py --args
-        # command: ["python", "/path/to/your_script.py"]
+        - name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
+          mountPath: /opt/app-root/src/granite-7b-lab
       restartPolicy: Never  # Run the job only once
       tolerations:
       - key: "nvidia.com/gpu"
@@ -35,7 +38,6 @@ spec:
       volumes:
       - name: log-volume
         emptyDir: {}  # Temporary storage for logs (or configure a persistent volume claim if needed)
-      - name: csp-managed-disk
+      - name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
         persistentVolumeClaim:
-          claimName: csp-managed-disk
-  backoffLimit: 3
+          claimName: granite-7b-lab-pvc

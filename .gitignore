@@ -1,3 +1,6 @@
 models/*
 venv
 log
+devtools-sidecar-injector/*
+!devtools-sidecar-injector/custom_values.yaml
+!devtools-sidecar-injector/custom_values_v2.yaml

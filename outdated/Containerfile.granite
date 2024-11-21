@@ -1,0 +1,9 @@
+FROM registry.access.redhat.com/ubi9/python-311:1-77.1729767833
+
+WORKDIR /opt/app-root/src/
+
+COPY download-granite.sh /opt/app-root/src/
+
+USER root
+
+ENTRYPOINT ["/bin/bash", "/opt/app-root/src/download-granite.sh"]

@@ -1,4 +1,0 @@
-colorama
-datetime
-kubernetes
-pyyaml

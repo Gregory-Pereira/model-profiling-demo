@@ -1,0 +1,22 @@
+### 
+### This pod is what I used to fill the pvc with the granite model so I can remove it from the container image
+###
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-data-into-pvc-pod
+  namespace: triton-profiling
+  labels:
+    author: grpereir
+spec:
+  containers:
+  - name: test-container
+    image: quay.io/grpereir/download-granite:latest
+    command: [ "sleep", "10800" ]
+    volumeMounts:
+    - mountPath: /opt/app-root/src/granite-7b-lab
+      name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
+  volumes:
+  - name: pvc-9d76fb27-8ab1-443d-b3f7-2b99e0235481
+    persistentVolumeClaim:
+      claimName: granite-7b-lab-pvc

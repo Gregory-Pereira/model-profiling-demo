@@ -9,8 +9,8 @@ profile:
         "persistentVolumeClaim": { "claimName": "csp-managed-disk" },
       },
     ]
-  volumeMounts:
-    [{ "name": "nsys-output-volume", "mountPath": "/mnt/nsys/output" }]
+  # volumeMounts:
+  #   [{ "name": "nsys-output-volume", "mountPath": "/mnt/nsys/output" }]
   # The arguments for the Nsight Systems. The placeholders will be replaced with the actual values.
   devtoolArgs: "profile --start-later false --duration 20 --kill none -o /mnt/nsys/output/auto_{PROCESS_NAME}_%{POD_FULLNAME}_%{CONTAINER_NAME}_{TIMESTAMP}_{UID}.nsys-rep"
   # The regex to match applications to profile.

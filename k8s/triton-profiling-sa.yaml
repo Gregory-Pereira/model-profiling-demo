@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: triton-profiling
+  name: nvidia-devtools-sidecar-injector
+  namespace: triton-profiling
